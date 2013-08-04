@@ -29,7 +29,7 @@ void delete_matrix(Matrix matrix){
   free(matrix);
 }
 
-Matrix multiply(Matrix first, Matrix second){
+Matrix multiply_mat(Matrix first, Matrix second){
   Matrix result = make_matrix();
 
   for(int i=0; i<4; i++){
@@ -49,8 +49,8 @@ double calculate_cell(Matrix first, Matrix second, int row, int column){
   return sum;
 }
 
-Matrix add(Matrix first, Matrix second){
-  Matrix result;
+Matrix add_mat(Matrix first, Matrix second){
+  Matrix result = make_matrix();
   for(int i=0; i<4; i++){
     for(int j=0; j<4; j++){
       result[i][j] = first[i][j] + second[i][j];
