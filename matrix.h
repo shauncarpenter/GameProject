@@ -5,11 +5,11 @@ typedef Row* Matrix;
 //  i.e., constructor, copiers, and destructors.
 Matrix make_matrix();
 Matrix copy_matrix(Matrix original);
-Matrix delete_matrix(Matrix matrix);
+void delete_matrix(Matrix matrix);
 
 //Basic matrix arithmetic.
-Matrix multiply(Matrix first, Matrix second);
-Matrix add(Matrix first, Matrix second);
+Matrix multiply_mat(Matrix first, Matrix second);
+Matrix add_mat(Matrix first, Matrix second);
 
 //Helper functions.
 double calculate_cell(Matrix first, Matrix second, int row, int column);
