@@ -8,7 +8,7 @@
 
 GLFWwindow* window;
 
-void error_callback(int error, char* description){
+void error_callback(int error, const char* description){
   printf(description);
 }
 

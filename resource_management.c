@@ -1,29 +1,34 @@
-#include <assimp/cimport.h>
-#include <assimp/postprocess.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+//#include <assimp/cimport.h>
+//#include <assimp/postprocess.h>
 
 #include "resource_management.h"
+
 
 //Given a file name, imports the models in the scene into the aiScene 
 //  Data structure.
 
-m
 
 aiScene* import_scene(char* file_name){
   aiScene* scene;
   aiPropertyStore* p_store = aiCreatePropertyStore();
   //Tell assimp that all line and point primitives should be removed.
-  aiSetImportPropertyInteger(pStore, AI_CONFIG_PP_SBP_REMOVE, 
+  aiSetImportPropertyInteger(p_store, AI_CONFIG_PP_SBP_REMOVE, 
 			     aiPrimitiveType_LINE | 
 			     aiPrimitiveType_POINT);
 
   //Do the import.
   scene = aiImportFile(file_name,
-		       riProcessPreset_TargetRealtime_MaxQuality);
+		       aiProcessPreset_TargetRealtime_MaxQuality);
 
   aiReleasePropertyStore(p_store);
   
   if(!scene){
-    printf("Error loading resource file \"\s\".", file_name);
+    printf("Error loading resource file \"%s\".", file_name);
     return NULL;
   }
 
@@ -42,7 +47,7 @@ Mesh extract_mesh(aiScene* scene, int mesh_num){
   aiMesh* assimp_mesh = scene->mMeshes[mesh_num];
 
   //Create and bind the vertex buffer.
-  glGenBuffers(1, &(mesh.arrah_buffer));
+  glGenBuffers(1, &mesh.array_buffer);
   glBindBuffer(GL_ARRAY_BUFFER, mesh.array_buffer);
 
   //Place the vertex data in the buffer.
@@ -74,5 +79,5 @@ Mesh extract_mesh(aiScene* scene, int mesh_num){
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
   free(indices);
-  return buffer;
+  return mesh;
 }

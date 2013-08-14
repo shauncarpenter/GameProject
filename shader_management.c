@@ -7,7 +7,7 @@
 //Reads a file into a string, returns the contents.
 char* read_file(char* file_name){
   char* result;
-  FILE file = fopen(file_name, "r");
+  FILE* file = fopen(file_name, "r");
   int count;
   if(file == NULL){
     printf("Error: File '%s' unsuccessfully opened.\n", file_name);
@@ -16,7 +16,7 @@ char* read_file(char* file_name){
 
   fseek(file, 0, SEEK_END);  
   count = ftell(file);
-  rewind(fp);
+  rewind(file);
 
   if(count == 0){
     printf("Error: file '%s' empty.\n", file_name);
@@ -25,7 +25,7 @@ char* read_file(char* file_name){
 
   result = (char*) malloc(sizeof(char)*(count+1));
   count = fread(result, sizeof(char), count, file);
-  content[count] = '\0';
+  result[count] = '\0';
   fclose(file);
 
   return result;
@@ -37,7 +37,7 @@ GLuint make_shader(GLenum type, char* file_name){
   char* shader_text = read_file(file_name);
   
   GLuint shader = glCreateShader(type);
-  glShaderSource(shader, 1, &shader_text, NULL);
+  glShaderSource(shader, 1, (const GLchar **)&shader_text, NULL);
 
   glCompileShader(shader);
   //TODO: Error check here.

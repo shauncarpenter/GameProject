@@ -1,5 +1,6 @@
 # Object files
 *.o
+obj
 
 # Libraries
 *.lib
@@ -18,3 +19,7 @@
 
 # Doxygen generated docs folder
 documentation
+
+# Generated Makefile
+Makefile
+*.make
