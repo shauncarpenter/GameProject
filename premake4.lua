@@ -7,6 +7,11 @@ solution "Game"
   files {"**.h", "**.c"}
   buildoptions {"-std=c99"}
 
+  configuration "Debug"
+    defines {"DEBUG"}
+    flags {"Symbols"}
+    buildoptions {"-g"}
+
   configuration "linux"
-    links {"GL", "glfw", "GLEW", "assimp"}
+    links {"GL","GLU", "glut", "m", "glfw", "GLEW", "assimp"}
     

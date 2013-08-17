@@ -1,11 +1,13 @@
-uniform mat4 model, view, projection;
+#version 130
+
+uniform mat4 view, projection;
 
 in vec3 position;
-in vec3 colour;
+//in vec3 colour;
 
-out vec3 out_colour;
+//out vec3 frag_colour;
 
 void main(){
-  out_colour = colour;
-  gl_Position = projection * view * model * position;
+  //frag_colour = colour;
+  gl_Position = projection * view * vec4(position, 1.0);
 }

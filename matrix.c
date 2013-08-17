@@ -58,3 +58,32 @@ Matrix add(Matrix first, Matrix second){
   }
   return result;
 }
+
+void zero_matrix(Matrix matrix){
+  for(int i=0; i<4; i++){
+    for(int j=0; j<4; j++){
+      matrix[i][j] = 0;
+    }
+  }
+}
+
+Matrix make_identity(){
+  Matrix matrix = make_matrix();
+  zero_matrix(matrix);
+  for(int i=0; i<4; i++){
+    matrix[i][i] = 1;
+  }
+  return matrix;
+}
+
+//Transforms the standard format matrix into a flat 16 element array.
+float* make_flat(Matrix matrix){
+  float* flat_matrix = (float*)malloc(sizeof(float)*16);
+  
+  for(int i=0; i<4; i++){
+    for(int j=0; j<4; j++){
+      flat_matrix[i*4 + j] = matrix[i][j];
+    }
+  }
+  return flat_matrix;
+}
